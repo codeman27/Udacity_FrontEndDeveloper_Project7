@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Map from './Map.js'
+import ResponsiveDrawer from './ResponsiveDrawer.js'
 import '../CSS/App.css'
 
 class App extends Component {
@@ -15,6 +16,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+        <ResponsiveDrawer/>
         <Map places={this.state.places}/>
       </div>
     )
