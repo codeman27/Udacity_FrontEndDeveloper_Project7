@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import Map from './Map.js'
 import ResponsiveDrawer from './ResponsiveDrawer.js'
-import '../CSS/App.css'
 
 class App extends Component {
   state = {
@@ -14,10 +13,13 @@ class App extends Component {
   }
 
   render() {
+    const {places} = this.state
+
     return (
       <div className="App">
-        <ResponsiveDrawer/>
-        <Map places={this.state.places}/>
+        <ResponsiveDrawer places={places}>
+          <Map places={places}/>
+        </ResponsiveDrawer>
       </div>
     )
   }

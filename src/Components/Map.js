@@ -4,9 +4,9 @@ import {Map, Marker, GoogleApiWrapper} from 'google-maps-react';
 export class MapContainer extends Component {
   render() {
     return (
-      <Map
+      <Map className='map-body'
         google={this.props.google}
-        zoom={12}
+        zoom={10}
         initialCenter={{lat: 39.0639,
           lng: -108.5506}}>
 

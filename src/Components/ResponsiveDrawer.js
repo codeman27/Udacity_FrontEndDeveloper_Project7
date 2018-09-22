@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { Fragment, Component} from 'react'
 import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
-import { Drawer, AppBar, Toolbar, List, Typography, IconButton, Hidden, Divider } from '@material-ui/core'
+import { Drawer, AppBar, Toolbar, Typography, IconButton, Hidden, Divider, CssBaseline } from '@material-ui/core'
 import MenuIcon from '@material-ui/icons/Menu';
 
 const drawerWidth = 240;
@@ -10,18 +10,14 @@ const styles = theme => ({
   root: {
     flexGrow: 1,
     zIndex: 1,
+    height: '100%',
     overflow: 'hidden',
-    position: 'relative',
+    position: 'absolute',
     display: 'flex',
     width: '100%',
   },
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
-    position: 'absolute',
-    marginLeft: drawerWidth,
-    [theme.breakpoints.up('md')]: {
-      width: `calc(100% - ${drawerWidth}px)`,
-    },
   },
   navIconHide: {
     [theme.breakpoints.up('md')]: {
@@ -38,11 +34,10 @@ const styles = theme => ({
   content: {
     flexGrow: 1,
     backgroundColor: theme.palette.background.default,
-    padding: theme.spacing.unit * 3,
   },
 });
 
-class ResponsiveDrawer extends React.Component {
+class ResponsiveDrawer extends Component {
   state = {
     mobileOpen: false,
   }
@@ -52,14 +47,21 @@ class ResponsiveDrawer extends React.Component {
   }
 
   render() {
-    const { classes, theme, children } = this.props
+    const { classes, children, places } = this.props
     const { mobileOpen } = this.state
 
     const drawer = (
       <div>
-        <div className={classes.toolbar} />
-        Hello
+        <Hidden smDown>
+          <div className={classes.toolbar} />
+        </Hidden>
+        <h2>Cool Places</h2>
         <Divider />
+        {places.map((place) => {
+          return (
+            <h5>{place.name}</h5>
+          )
+        })}
       </div>
     );
 
@@ -76,7 +78,7 @@ class ResponsiveDrawer extends React.Component {
               <MenuIcon />
             </IconButton>
             <Typography variant="title" color="inherit" noWrap>
-              Responsive drawer
+              My Neighborhood
             </Typography>
           </Toolbar>
         </AppBar>
@@ -107,7 +109,7 @@ class ResponsiveDrawer extends React.Component {
           </Drawer>
         </Hidden>
         <main className={classes.content}>
-
+          {children}
         </main>
       </div>
     );
