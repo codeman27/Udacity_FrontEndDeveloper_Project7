@@ -1,7 +1,7 @@
-import React, { Fragment, Component} from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
-import { Drawer, AppBar, Toolbar, Typography, IconButton, Hidden, Divider, CssBaseline } from '@material-ui/core'
+import { Drawer, AppBar, Toolbar, Typography, IconButton, Hidden, Divider, Input } from '@material-ui/core'
 import MenuIcon from '@material-ui/icons/Menu';
 
 const drawerWidth = 240;
@@ -47,7 +47,7 @@ class ResponsiveDrawer extends Component {
   }
 
   render() {
-    const { classes, children, places } = this.props
+    const { classes, children, places, searchFunc, searchVal } = this.props
     const { mobileOpen } = this.state
 
     const drawer = (
@@ -55,11 +55,19 @@ class ResponsiveDrawer extends Component {
         <Hidden smDown>
           <div className={classes.toolbar} />
         </Hidden>
-        <h2>Cool Places</h2>
+        <Input
+          value={searchVal}
+          placeholder="Search"
+          onChange={searchFunc}
+          className={classes.input}
+          inputProps={{
+            'aria-label': 'Description',
+        }}
+      />
         <Divider />
         {places.map((place) => {
           return (
-            <h5>{place.name}</h5>
+            <h5 key={place.name}>{place.name}</h5>
           )
         })}
       </div>
