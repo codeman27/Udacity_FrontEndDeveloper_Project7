@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
-import { Drawer, AppBar, Toolbar, Typography, IconButton, Hidden, Divider, Input } from '@material-ui/core'
+import { Drawer, AppBar, Toolbar, Typography, IconButton, Hidden, Divider, Input, Button } from '@material-ui/core'
 import MenuIcon from '@material-ui/icons/Menu';
 
 const drawerWidth = 240;
@@ -46,6 +46,11 @@ class ResponsiveDrawer extends Component {
     this.setState(state => ({ mobileOpen: !state.mobileOpen }))
   }
 
+  onPlaceClick = () => {
+    console.log('onPlaceClick')
+    this.props.markerClick();
+  }
+
   render() {
     const { classes, children, places, searchFunc, searchVal } = this.props
     const { mobileOpen } = this.state
@@ -67,7 +72,9 @@ class ResponsiveDrawer extends Component {
         <Divider />
         {places.map((place) => {
           return (
-            <h5 key={place.name}>{place.name}</h5>
+            <Button key={place.name}
+              onClick={this.onPlaceClick}
+              >{place.title}</Button>
           )
         })}
       </div>
