@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Map from './Map.js'
 import ResponsiveDrawer from './ResponsiveDrawer.js'
+import * as YelpAPI from './YelpAPI';
 
 class App extends Component {
   state = {
@@ -47,9 +48,11 @@ class App extends Component {
       if(this.state.markers[key].marker.name === placeName) {
         marker = this.state.markers[key]
       }
+      return []
     });
     this.onMarkerClick(props, marker.marker)
     this.handleDrawerToggle()
+    YelpAPI.get()
   }
 
   getMarkerList = (markers) => {
