@@ -13,16 +13,22 @@ class App extends Component {
     filteredPlaces: [],
     searchItem: '',
     showingInfoWindow: false,
-    activeMarker: {},
+    activeMarkerPos: {},
     selectedPlace: {},
+    markers: {},
+    mobileOpen: false
   }
 
-  onMarkerClick = (props, marker, e) => {
-    console.log('onMarkerClick')
-    console.log(marker)
+  handleDrawerToggle = () => {
+    this.setState(state => ({ mobileOpen: !state.mobileOpen }))
+  }
+
+  onMarkerClick = (props, position) => {
+    console.log('onMarkerClick: ')
+    console.log(position)
     this.setState({
       selectedPlace: props,
-      activeMarker: marker,
+      activeMarkerPos: position,
       showingInfoWindow: true
     })
   }
@@ -36,9 +42,25 @@ class App extends Component {
     }
   }
 
+  onButtonClick = (props, placeName) => {
+    let marker = {}
+
+    Object.keys(this.state.markers).filter((key, index) => {
+      if(this.state.markers[key].marker.name === placeName) {
+        marker = this.state.markers[key]
+      }
+    });
+    this.onMarkerClick(props, marker.marker)
+    this.handleDrawerToggle()
+  }
+
+  getMarkerList = (markers) => {
+    this.setState({ markers })
+  }
+
   updatePlaceList = () => {
     this.state.searchItem === '' ? this.setState({filteredPlaces: this.state.places}) :
-    this.setState({filteredPlaces: this.state.places.filter(place => place.name.includes(this.state.searchItem))})
+    this.setState({filteredPlaces: this.state.places.filter(place => place.name.toUpperCase().includes(this.state.searchItem.toUpperCase()))})
   }
 
   updateSearchItem = (event) => {
@@ -50,24 +72,26 @@ class App extends Component {
   }
 
   render() {
-    const {searchItem, filteredPlaces, selectedPlace, showingInfoWindow, activeMarker} = this.state
+    const {searchItem, filteredPlaces, selectedPlace, showingInfoWindow, activeMarkerPos, mobileOpen} = this.state
 
     return (
       <div className="App">
         <ResponsiveDrawer places={filteredPlaces}
           searchFunc={this.updateSearchItem}
           searchVal={searchItem}
-          markerClick={this.onMarkerClick}
-          mapClick={this.onMapClick}
           selectedPlace={selectedPlace}
           showingInfoWindow={showingInfoWindow}
-          activeMarker={activeMarker}>
+          activeMarkerPos={activeMarkerPos}
+          onButtonClick={this.onButtonClick}
+          handleDrawerToggle={this.handleDrawerToggle}
+          mobileOpen={mobileOpen}>
           <Map places={filteredPlaces}
             markerClick={this.onMarkerClick}
             mapClick={this.onMapClick}
             selectedPlace={selectedPlace}
             showingInfoWindow={showingInfoWindow}
-            activeMarker={activeMarker}
+            activeMarkerPos={activeMarkerPos}
+            getMarkerList={this.getMarkerList}
           />
         </ResponsiveDrawer>
       </div>

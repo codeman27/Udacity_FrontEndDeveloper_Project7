@@ -38,22 +38,22 @@ const styles = theme => ({
 });
 
 class ResponsiveDrawer extends Component {
-  state = {
-    mobileOpen: false,
-  }
+  // state = {
+  //   mobileOpen: false,
+  // }
+  //
+  // handleDrawerToggle = () => {
+  //   this.setState(state => ({ mobileOpen: !state.mobileOpen }))
+  // }
 
-  handleDrawerToggle = () => {
-    this.setState(state => ({ mobileOpen: !state.mobileOpen }))
-  }
-
-  onPlaceClick = () => {
+  onPlaceClick(props, placeName){
     console.log('onPlaceClick')
-    this.props.markerClick();
+    this.props.onButtonClick(props, placeName);
   }
 
   render() {
     const { classes, children, places, searchFunc, searchVal } = this.props
-    const { mobileOpen } = this.state
+    const { mobileOpen } = this.props
 
     const drawer = (
       <div>
@@ -73,7 +73,7 @@ class ResponsiveDrawer extends Component {
         {places.map((place) => {
           return (
             <Button key={place.name}
-              onClick={this.onPlaceClick}
+              onClick={() => this.onPlaceClick(place, place.name)}
               >{place.title}</Button>
           )
         })}
@@ -87,7 +87,7 @@ class ResponsiveDrawer extends Component {
             <IconButton
               color="inherit"
               aria-label="Open drawer"
-              onClick={this.handleDrawerToggle}
+              onClick={this.props.handleDrawerToggle}
               className={classes.navIconHide}
             >
               <MenuIcon />
