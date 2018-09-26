@@ -7,13 +7,11 @@ class MapContainer extends Component {
   }
 
   componentDidMount = () => {
-    console.log(this.props)
     this.setState({ markers: this.refs})
     this.props.getMarkerList(this.refs)
   }
 
   render() {
-    //console.log(this.props.activeMarkerPos.position)
     return (
       <Map className='map-body'
         google={this.props.google}

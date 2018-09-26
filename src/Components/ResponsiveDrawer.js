@@ -38,16 +38,7 @@ const styles = theme => ({
 });
 
 class ResponsiveDrawer extends Component {
-  // state = {
-  //   mobileOpen: false,
-  // }
-  //
-  // handleDrawerToggle = () => {
-  //   this.setState(state => ({ mobileOpen: !state.mobileOpen }))
-  // }
-
   onPlaceClick(props, placeName){
-    console.log('onPlaceClick')
     this.props.onButtonClick(props, placeName);
   }
 

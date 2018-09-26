@@ -24,8 +24,6 @@ class App extends Component {
   }
 
   onMarkerClick = (props, position) => {
-    console.log('onMarkerClick: ')
-    console.log(position)
     this.setState({
       selectedPlace: props,
       activeMarkerPos: position,
