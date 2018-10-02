@@ -29,7 +29,6 @@ class App extends Component {
           })
     Promise.all(promises).then((results) => {
       this.setState({filteredPlaces: results})
-      console.log('loaded ratings')
     })
   }
 

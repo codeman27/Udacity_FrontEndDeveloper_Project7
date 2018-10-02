@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import {Map, Marker, GoogleApiWrapper, InfoWindow} from 'google-maps-react';
+import styles from '../CSS/Map.css'
 
 class MapContainer extends Component {
   state = {
@@ -39,7 +40,7 @@ class MapContainer extends Component {
           options={{pixelOffset: new window.google.maps.Size(0,-40)}}>
            <div>
              <h1>{selectedPlace.name}</h1>
-             <p>Yelp Rating: {selectedPlace.yelpRating === '' ? '...loading' : selectedPlace.yelpRating}</p>
+             <p>Yelp Rating: <span className='rating'>{selectedPlace.yelpRating === '' ? '...loading' : selectedPlace.yelpRating}</span></p>
            </div>
        </InfoWindow>
       </Map>
