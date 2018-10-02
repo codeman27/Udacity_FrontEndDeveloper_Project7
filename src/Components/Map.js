@@ -12,32 +12,34 @@ class MapContainer extends Component {
   }
 
   render() {
+    const {places, activeMarkerPos, showingInfoWindow, selectedPlace, google} = this.props
+
     return (
       <Map className='map-body'
-        google={this.props.google}
+        google={google}
         zoom={10}
         initialCenter={{lat: 39.0639, lng: -108.5506}}
         onClick={this.props.mapClick}
       >
 
-        {this.props.places.map((place) => (
+        {places.map((place) => (
             <Marker
               key={place.name}
               title= {place.title}
               name={place.name}
               position={place.position}
-              onClick={this.props.markerClick}
+              onClick={() => this.props.markerClick(place, place.position)}
               ref={place.name}
             />
           )
         )}
         <InfoWindow
-          position={this.props.activeMarkerPos.position}
-          visible={this.props.showingInfoWindow}
-          options={{pixelOffset: new window.google.maps.Size(0,-40)}}
-          onClick={this.test}>
+          position={activeMarkerPos.position}
+          visible={showingInfoWindow}
+          options={{pixelOffset: new window.google.maps.Size(0,-40)}}>
            <div>
-             <h1>{this.props.selectedPlace.name}</h1>
+             <h1>{selectedPlace.name}</h1>
+             <p>Yelp Rating: {selectedPlace.yelpRating === '' ? '...loading' : selectedPlace.yelpRating}</p>
            </div>
        </InfoWindow>
       </Map>

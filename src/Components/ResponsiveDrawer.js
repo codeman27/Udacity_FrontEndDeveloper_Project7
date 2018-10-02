@@ -64,8 +64,8 @@ class ResponsiveDrawer extends Component {
         {places.map((place) => {
           return (
             <Button key={place.name}
-              onClick={() => this.onPlaceClick(place, place.name)}
-              >{place.title}</Button>
+              onClick={() => this.onPlaceClick(place, place.name)}>{place.title}
+            </Button>
           )
         })}
       </div>
