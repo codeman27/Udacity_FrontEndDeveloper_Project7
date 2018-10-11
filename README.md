@@ -28,10 +28,10 @@ npm start
 ## Details
 This is for the 7th project in the Udacity Front End Developer nanodegree. 
 
-## 3rd Party APIs 
+### 3rd Party APIs 
 - Google Maps
 - Yelp API
 
-## Libraries
+### Libraries
 - google-maps-react
 - default-passive-events
