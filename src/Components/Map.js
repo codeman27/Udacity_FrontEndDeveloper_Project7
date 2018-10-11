@@ -7,6 +7,10 @@ class MapContainer extends Component {
     markers: [],
   }
 
+  componentDidCatch() {
+    console.log('ERRORRR')
+  }
+
   componentDidMount = () => {
     this.setState({ markers: this.refs})
     this.props.getMarkerList(this.refs)

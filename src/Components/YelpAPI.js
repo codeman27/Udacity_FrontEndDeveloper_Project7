@@ -7,8 +7,8 @@ const headers = {
   'Authorization': `Bearer ${apiKey}`
 }
 
-
  export const get = (yelpID) =>
    fetch(`${api}${yelpID}`, { headers })
      .then(res => res.json())
      .then(data => data.rating)
+     .catch(err => err)

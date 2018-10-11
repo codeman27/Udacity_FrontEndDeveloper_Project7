@@ -22,12 +22,20 @@ class App extends Component {
 
   getYelpInfo = () => {
     let promises = this.state.filteredPlaces.map((place) => {
-            return YelpAPI.get(place.yelpID).then((rating) => {
-              place.yelpRating = rating
+            return YelpAPI.get(place.yelpID)
+            .then((rating) => {
+              if(isNaN(rating)) {
+                place.yelpRating = 'API Failed'
+              } else {
+                place.yelpRating = rating
+              }
               return place
             })
           })
-    Promise.all(promises).then((results) => {
+
+    //This is to make sure all promises resolve before setting state
+    Promise.all(promises)
+    .then((results) => {
       this.setState({filteredPlaces: results})
     })
   }
@@ -63,6 +71,7 @@ class App extends Component {
   onButtonClick = (props, placeName) => {
     let marker = {}
 
+    // Getting marker information for the Info Window
     Object.keys(this.state.markers).filter((key, index) => {
       if(this.state.markers[key].marker.name === placeName) {
         marker = this.state.markers[key]
