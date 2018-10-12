@@ -7,11 +7,13 @@ class MapContainer extends Component {
     markers: [],
   }
 
-  componentDidCatch() {
-    console.log('ERRORRR')
+  gm_authFailure(){
+      window.alert("Google Maps error!")
   }
 
+
   componentDidMount = () => {
+    window.gm_authFailure = this.gm_authFailure
     this.setState({ markers: this.refs})
     this.props.getMarkerList(this.refs)
   }
