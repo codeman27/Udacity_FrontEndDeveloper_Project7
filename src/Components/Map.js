@@ -7,20 +7,24 @@ class MapContainer extends Component {
     markers: [],
   }
 
-  gm_authFailure(){
+  gm_authFailure = () => {
       window.alert("Google Maps error!")
   }
 
-
+  //Can't get google-maps-react to give me something when the API is blocked
   componentDidMount = () => {
-    window.gm_authFailure = this.gm_authFailure
+    window.gm_authFailure = () => {
+      console.log('Error')
+    }
+    //this.gm_authFailure()
     this.setState({ markers: this.refs})
     this.props.getMarkerList(this.refs)
   }
 
   render() {
     const {places, activeMarkerPos, showingInfoWindow, selectedPlace, google} = this.props
-
+    console.log(selectedPlace.name)
+    console.log()
     return (
       <Map className='map-body'
         google={google}
@@ -30,13 +34,15 @@ class MapContainer extends Component {
       >
 
         {places.map((place) => (
-            <Marker
+           <Marker
               key={place.name}
               title= {place.title}
               name={place.name}
               position={place.position}
               onClick={() => this.props.markerClick(place, place.position)}
               ref={place.name}
+              animation={(selectedPlace.name === place.name)
+                && this.props.google.maps.Animation.BOUNCE}
             />
           )
         )}
