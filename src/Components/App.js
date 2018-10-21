@@ -57,8 +57,6 @@ class App extends Component {
       activeMarkerPos: marker.marker,
       showingInfoWindow: true
     })
-
-    console.log(props)
   }
 
   onMapClick = () => {
