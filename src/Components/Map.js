@@ -15,7 +15,6 @@ class MapContainer extends Component {
   componentDidMount = () => {
     //This isn't working
     window.gm_authFailure = this.gm_authFailure
-    //this.gm_authFailure()
     this.setState({ markers: this.refs})
     this.props.getMarkerList(this.refs)
   }
@@ -38,10 +37,8 @@ class MapContainer extends Component {
               title= {place.title}
               name={place.name}
               position={place.position}
-              onClick={() => this.props.markerClick(place, place.position)}
+              onClick={() => this.props.markerClick(place, place.position, google)}
               ref={place.name}
-              animation={(selectedPlace.name === place.name)
-                && this.props.google.maps.Animation.BOUNCE}
             />
           )
         )}

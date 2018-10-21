@@ -44,7 +44,7 @@ class App extends Component {
     this.setState(state => ({ mobileOpen: !state.mobileOpen }))
   }
 
-  onMarkerClick = (props, position) => {
+  onMarkerClick = (props, position, google) => {
     let marker = {}
     Object.keys(this.state.markers).filter((key, index) => {
       if(this.state.markers[key].marker.name === props.name) {
@@ -57,6 +57,11 @@ class App extends Component {
       activeMarkerPos: marker.marker,
       showingInfoWindow: true
     })
+
+    marker.marker.setAnimation(google.maps.Animation.BOUNCE)
+    setTimeout(function() {
+      marker.marker.setAnimation(null)
+    }, 700)
   }
 
   onMapClick = () => {
