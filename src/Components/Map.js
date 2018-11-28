@@ -11,9 +11,7 @@ class MapContainer extends Component {
       window.alert("Google Maps error!")
   }
 
-  //Can't get google-maps-react to give me something when the API is blocked
   componentDidMount = () => {
-    //This isn't working
     window.gm_authFailure = this.gm_authFailure
     this.setState({ markers: this.refs})
     this.props.getMarkerList(this.refs)
